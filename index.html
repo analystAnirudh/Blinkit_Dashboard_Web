@@ -3,1148 +3,1202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anirudh Chaudhary | Data-Driven Business Analyst</title>
+    <title>Blinkit Operations Dashboard | Data Visualization Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-color: #146EB4; /* Original blue */
+            --secondary-color: #232F3E; /* Original navy */
+            --background-color: #f2f3f3; /* Light gray background */
+            --text-color: #003068; /* Dark text */
+            --accent-color: #FF9900; /* Original orange */
+            --success-color: #00A65A; /* Green for positive metrics */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Blinkit Logo Placement - Top Right Corner */
+        .blinkit-logo-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+
+        .blinkit-logo {
+            height: 60px;
+            width: auto;
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        .blinkit-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Header Section */
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 4px solid var(--accent-color);
+            position: relative;
+        }
+
+        .header-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .header-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-top: 20px;
+            color: var(--primary-color);
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .profile-description {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        /* Dashboard Section */
+        .dashboard-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-bottom: 40px;
+            border: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .dashboard-image {
+            width: 100%;
+            height: auto;
+            border: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dashboard-image:hover {
+            opacity: 0.95;
+        }
+
+        .fullscreen-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-toggle:hover {
+            background-color: #0d5a9e;
+            transform: translateY(-2px);
+        }
+
+        .dashboard-container.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+
+        .dashboard-container.fullscreen .dashboard-image {
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Key Metrics Section */
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid var(--secondary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-icon {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            transition: all 0.5s ease;
+        }
+
+        .metric-card:hover .metric-icon {
+            transform: rotate(10deg) scale(1.1);
+            color: var(--accent-color);
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+            height: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .metric-text-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+            height: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .highlight {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        /* Sections */
+        .section {
+            background-color: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+
+        .section-header:hover {
+            background-color: #f0f0f0;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .section-toggle {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .section-content.active {
+            max-height: 1000px;
+            padding: 20px;
+        }
+
+        .section-content p {
+            color: var(--text-color);
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .section-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .section-content li {
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        .insight-box {
+            background-color: #f7f9fa;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .insight-box:hover {
+            transform: translateX(5px);
+        }
+
+        .insight-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        /* Download Button */
+        .download-button {
+            display: block;
+            margin: 40px auto 0;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .download-button:hover {
+            background-color: #0d5a9e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .download-button i {
+            margin-right: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .download-button:hover i {
+            transform: scale(1.2);
+        }
+
+        /* PowerBI Download Button */
+        .powerbi-download-button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 24px;
+            background-color: #F2C811; /* PowerBI yellow */
+            color: #000;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .powerbi-download-button:hover {
+            background-color: #e0b810;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .powerbi-download-button i {
+            margin-right: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .powerbi-download-button:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            justify-items: center;
+            margin-top: 30px;
+        }
+
+        .skill-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(154, 154, 154, 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 250px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(137, 137, 137, 0.2);
+        }
+
+        .skill-card .icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            transition: all 0.5s ease;
+        }
+
+        .skill-card:hover .icon {
+            transform: rotate(15deg) scale(1.2);
+            color: var(--accent-color);
+        }
+
+        .skill-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .skill-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .linkedin { background-color: #0077B5; }
+        .github { background-color: #333; }
+        .gmail { background-color: #D14836; }
+        .social-links i {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .profile-name {
+                font-size: 1.8rem;
+            }
+            
+            .metrics-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .blinkit-logo-container {
+                top: 10px;
+                right: 10px;
+            }
+
+            .blinkit-logo {
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .metrics-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-name {
+                font-size: 1.6rem;
+            }
+            
+            .header-title {
+                font-size: 1.8rem;
+            }
+
+            .metric-value {
+                font-size: 1.5rem;
+            }
+
+            .metric-text-value {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Footer */
+        footer {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: #444;
+            text-align: center;
+            padding: 25px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 60px;
+            box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        footer p {
+            margin: 6px 0;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--text-color);
+        }
+
+        .footer-name {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .footer-copyright {
+            margin: 4px 0;
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        /* Projects Showcase System */
+        .projects-master-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .master-toggle {
+            background-color: white;
+            color: #131A22;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .master-toggle:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .master-toggle i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .master-toggle.active i {
+            transform: rotate(180deg);
+        }
+
+        /* Google Project Container */
+        .google-project-container {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 300px;
+            opacity: 0;
+            transform: translateY(10px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: -1;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+        .google-project-container.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            z-index: 1;
+        }
+
+        .google-project-header {
+            background-color: #4285F4; /* Google blue */
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .google-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .google-project-title {
+            font-weight: 600;
+            color: white;
+        }
+
+        .google-project-content {
+            padding: 15px;
+        }
+
+        .google-project-description {
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .google-project-link {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .google-project-link:hover {
+            background-color: #0d5a9e;
+            transform: translateY(-2px);
+        }
+
+        /* Typewriter effect */
+        .typewriter {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .typewriter::after {
+            content: '|';
+            position: absolute;
+            right: -5px;
+            animation: blink 0.7s infinite;
+            color: var(--secondary-color);
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .projects-master-container {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .master-toggle {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .google-project-container {
+                width: 280px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="header">
-        <a href="#" class="logo">Anirudh Chaudhary</a>
-        <nav class="navbar">
-            <a href="#home" class="nav-btn active">Home</a>
-            <a href="#about" class="nav-btn">About</a>
-            <a href="#education" class="nav-btn">Education</a>
-            <a href="#experience" class="nav-btn">Experience</a>
-            <a href="#skills" class="nav-btn">Skills</a>
-            <a href="#projects" class="nav-btn">Projects</a>
-            <a href="#leadership" class="nav-btn">Leadership</a>
-            <a href="#certifications" class="nav-btn">Certifications</a>
-            <a href="#testimonials" class="nav-btn">Testimonial</a>
-            <a href="#contact" class="nav-btn">Contact</a>
-        </nav>
-        <div class="bx bx-moon" id="darkMode-icon"></div>
-        <div class="bx bx-menu" id="menu-icon"></div>
-    </header>
-
-    <!-- Gamified Scroll Progress Bar -->
-    <div class="scroll-progress-container">
-        <div class="scroll-progress-track">
-            <div class="scroll-progress-bar"></div>
-            <div class="scroll-progress-dot"></div>
-        </div>
-        <div class="scroll-progress-percent">
-            <span class="scroll-progress-number">0</span>
-            <span class="scroll-progress-symbol">%</span>
-        </div>
+    <!-- Blinkit Logo Placement - Top Right Corner -->
+    <div class="blinkit-logo-container">
+        <img src="images/Blinkit_logo_upscayl.png" alt="Blinkit Logo" class="blinkit-logo">
     </div>
 
-    <!-- Home Section -->
-    <section class="home" id="home">
-        <div class="home-content">
-            <h3>Hello, I am</h3>
-            <div class="name-container">
-                <h1 class="typed-name"></h1>
-            </div>
-            <p>I'm a <span class="multiple-text"></span></p>
-            <p>Associate Data Analyst with expertise in SQL, Python, Tableau, and Power BI & Advance Excel; specializing in risk analytics, operational insights, and data visualization.</p>
-            <div class="social-media">
-                <a href="https://www.linkedin.com/in/anirrudhchaudhry/"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/analystAnirudh"><i class="fab fa-github"></i></a>
-                <a href="mailto:anirudhchaudhary.bba2023@imsuc.ac.in"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+917668854321"><i class="fas fa-phone"></i></a>
-            </div>
-            <a href="img/Anirudh_Chaudhary_CV.pdf" class="btn">Download CV</a>
-        </div>
-        <div class="profession-container">
-            <div class="profession-box">
-                <div class="profession" style="--i:0;">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Data Analyst</h3>
-                </div>
-                <div class="profession" style="--i:1;">
-                    <i class="fas fa-database"></i>
-                    <h3>SQL Expert</h3>
-                </div>
-                <div class="profession" style="--i:2;">
-                    <i class="fas fa-chart-pie"></i>
-                    <h3>Power BI</h3>
-                </div>
-                <div class="profession" style="--i:3;">
-                    <i class="fas fa-file-excel"></i>
-                    <h3>Excel Specialist</h3>
-                </div>
-                <div class="circle"></div>
-            </div>
-            <div class="overlay"></div>
-        </div>
-    </section>
-    
+    <div class="header">
+        <h1 class="header-title">Blinkit Operations Dashboard</h1>
+        <p class="header-subtitle">Data-Driven Insights for Quick Commerce Performance</p>
+    </div>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="about-img">
-            <img src="img/hero.png" alt="Anirudh Chaudhary">
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="profile">
+            <img src="/images/Anirudh_image.png" alt="Profile Picture" class="profile-image">
+            <h1 class="profile-name">Anirudh Chaudhary</h1>
+            <p class="profile-title">Business Analyst | Data Visualization Specialist</p>
+            <p class="profile-description">
+                This interactive dashboard provides comprehensive insights into Blinkit's quick commerce operations, 
+                analyzing delivery performance, order patterns, and customer behavior metrics. Designed to help 
+                optimize operations and enhance customer experience in the fast-paced quick commerce industry.
+            </p>
         </div>
-        <div class="about-content">
-            <h2 class="heading">About <span>Me</span></h2>
-            <h3>Data-Driven Business Analyst</h3>
-            <p>Passionate about leveraging data to optimize workflows, drive strategic decisions, and solve business challenges. I specialize in transforming complex data into actionable insights that drive business growth and operational efficiency.</p>
-            <p>With expertise in data visualization, statistical analysis, and business intelligence tools, I help organizations make data-informed decisions that create tangible impact.</p>
-           
+
+        <!-- Key Metrics Section -->
+        <div class="metrics-container">
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+                <div class="metric-label">Total Orders</div>
+                <div class="metric-value" id="total-orders">0</div>
+                <div>Across all service areas</div>
             </div>
-            <div class="tab-contents" id="experience">
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="metric-label">Avg Delivery Time</div>
+                <div class="metric-value" id="avg-delivery">0</div>
+                <div>Minutes per order</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="metric-label">Active Customers</div>
+                <div class="metric-value" id="customers">0</div>
+                <div>Repeat buyers</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="metric-label">Top Category</div>
+                <div class="metric-text-value" id="top-category">Groceries</div>
+                <div>Highest order volume</div>
+            </div>
+        </div>
+
+        <div class="dashboard-container" id="dashboard-container">
+            <button class="fullscreen-toggle" id="fullscreen-toggle">
+                <i class="fas fa-expand"></i> Fullscreen
+            </button>
+            <a href="Blinkit_Dashboard_Anirudh_Power_BI.pbix" download="Blinkit_Dashboard_Anirudh_Power_BI.pbix">
+                <img src="images/Dashboard_image.jpg" alt="Blinkit Power BI Dashboard" class="dashboard-image">
+            </a>
+        </div>Download Buttons 
+
+        <!-- Dashboard Insights Sections -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Operations Performance Analysis</h2>
+                <div class="section-toggle">+</div>
+            </div>
+            <div class="section-content">
+                <p>The Operations Performance Analysis provides a comprehensive view of delivery metrics across service areas and time periods. Key findings include:</p>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Delivery Efficiency</div>
+                    <p>Deliveries are most efficient in <span class="highlight">urban centers</span> with average delivery times under 10 minutes. Suburban areas show slightly longer delivery times averaging 15-20 minutes during peak hours.</p>
+                </div>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Order Patterns</div>
+                    <p><strong>Evening hours</strong> (5-9 PM) account for 45% of daily orders, with <strong>groceries</strong> being the most frequently ordered category. This suggests opportunities for targeted promotions during these high-traffic periods.</p>
+                </div>
+                
                 <ul>
-                    <li><span>2024</span><br>Data Analytics Trainee - MedTourEasy Pvt. Ltd.</li>
-                    <li><span>2024</span><br>Fellowship + Project Management Intern - FORUPPO</li>
+                    <li>Consistent order growth observed month-over-month, with 15% increase in repeat customers</li>
+                    <li>Delivery partners maintain an average rating of 4.7/5 across all service areas</li>
+                    <li>Opportunity to optimize delivery routes in suburban areas to match urban efficiency</li>
                 </ul>
             </div>
         </div>
-    </section>
-    
 
-    <!-- Education Section -->
-    <section class="education" id="education">
-        <h2 class="heading">My <span>Education</span></h2>
-        <div class="education-container">
-            <div class="education-box">
-                <img src="img/IMS-UC-LOGO.webp" alt="IMS Ghaziabad" class="edu-logo">
-                <h3>Bachelor of Business Administration</h3>
-                <p>Institute of Management Studies, Ghaziabad</p>
-                <p>2023-2026</p>
-                <div class="education-content">
-                    <ul>
-                        <li>Specialization in Data Analytics</li>
-                        <li>Coursework in Business Statistics, Data Mining, Predictive Analytics</li>
-                        <li>GPA: 7.5/10</li>
-                    </ul>
-                </div>
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Product Category Insights</h2>
+                <div class="section-toggle">+</div>
             </div>
-            <div class="education-box">
-                <img src="img/KDMA.png" alt="KDMA International" class="edu-logo">
-                <h3>Class XII (Senior Secondary)</h3>
-                <p>K.D.M.A International, Kanpur</p>
-                <p>2022</p>
-                <div class="education-content">
-                    <ul>
-                        <li>School Topper in English</li>
-                        <li>House Prefect</li>
-                    </ul>
+            <div class="section-content">
+                <p>Detailed analysis of product category performance reveals strategic opportunities for inventory optimization:</p>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Top Performing Categories</div>
+                    <p><strong>Groceries</strong> and <strong>snacks</strong> show particularly strong performance, accounting for 60% of total orders. The <strong>personal care</strong> category shows growing demand with 25% month-over-month growth.</p>
                 </div>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Inventory Strategy</div>
+                    <p>With average order value of ₹450, there's potential to bundle high-margin items with fast-moving grocery products to increase basket size.</p>
+                </div>
+                
+                <ul>
+                    <li>Essential items show steady demand throughout the day, indicating reliable inventory requirements</li>
+                    <li>Snacks and beverages show peak demand during evening hours, suggesting targeted stocking</li>
+                    <li>Opportunity to expand product range in high-growth categories like personal care</li>
+                </ul>
             </div>
-            <div class="education-box">
-                <img src="img/kdma.png" alt="KDMA International" class="edu-logo">
-                <h3>Class X (Secondary)</h3>
-                <p>K.D.M.A International, Kanpur</p>
-                <p>2020</p>
-                <div class="education-content">
-                    <ul>
-                        <li>Recipient of Academic Excellence Award</li>
-                        <li>Member of School Science Club</li>
-                    </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Geographical Performance</h2>
+                <div class="section-toggle">+</div>
+            </div>
+            <div class="section-content">
+                <p>The geographical analysis highlights key markets and service areas with optimization opportunities:</p>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Top Performing Areas</div>
+                    <p><span class="highlight">Central business districts</span> and <span class="highlight">high-density residential areas</span> emerge as the strongest markets, with highest order frequency and fastest delivery times. These areas should be prioritized for marketing campaigns and inventory placement.</p>
+                </div>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Expansion Opportunities</div>
+                    <p>Suburban areas show consistent demand but may benefit from optimized delivery routes and localized inventory to improve service times. The data suggests potential for "dark store" placement in these areas.</p>
+                </div>
+                
+                <ul>
+                    <li>Delivery data reveals efficient coverage in urban centers with room for optimization in suburban areas</li>
+                    <li>No significant regional preference for specific product categories observed</li>
+                    <li>Potential to optimize dark store locations based on geographical demand patterns</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Customer Behavior</h2>
+                <div class="section-toggle">+</div>
+            </div>
+            <div class="section-content">
+                <p>Analysis of customer metrics reveals patterns and opportunities in user engagement:</p>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Order Patterns</div>
+                    <p>Customers show strong preference for <strong>evening deliveries</strong> (5-9 PM), accounting for 45% of daily orders. The average order frequency is 2.3 times per week for active customers.</p>
+                </div>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Retention Metrics</div>
+                    <p>30-day customer retention rate stands at 65%, with repeat customers having 35% higher average order value than first-time buyers. This highlights the importance of loyalty programs and retention strategies.</p>
+                </div>
+                
+                <ul>
+                    <li>Mobile app users show 20% higher order frequency than web users</li>
+                    <li>Opportunity to implement personalized recommendations based on order history</li>
+                    <li>Potential to optimize push notification timing based on customer order patterns</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Strategic Recommendations</h2>
+                <div class="section-toggle">+</div>
+            </div>
+            <div class="section-content">
+                <p>Based on the comprehensive data analysis, the following strategic actions are recommended:</p>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Operations Strategy</div>
+                    <p>1. Optimize delivery routes in suburban areas to match urban efficiency<br>
+                    2. Implement dynamic delivery pricing during peak hours to manage demand<br>
+                    3. Expand dark store network in high-growth suburban areas</p>
+                </div>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Inventory Strategy</div>
+                    <p>1. Increase stock of high-demand items during peak evening hours<br>
+                    2. Create bundled offers combining groceries with high-margin items<br>
+                    3. Expand personal care category based on growing demand</p>
+                </div>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Customer Engagement</div>
+                    <p>1. Develop loyalty program to increase repeat purchases<br>
+                    2. Optimize push notification timing based on customer order patterns<br>
+                    3. Implement personalized recommendations to increase basket size</p>
                 </div>
             </div>
         </div>
-    </section>
-    
 
-    <!-- Experience Section -->
-    <section class="experience" id="experience">
-        <h2 class="heading">My <span>Experience</span></h2>
-        <div class="experience-container">
-            <div class="experience-box">
-                <img src="img/foruppo-logo.jpg" alt="FORUPPO">
-                <div class="experience-content">
-                    <h3>FORUPPO (Technology Startup, Bangalore)</h3>
-                    <p><strong>Fellowship + Project Management Intern</strong></p>
-                    <p class="duration">May 2024 - Oct 2024 (6 months)</p>
-                    <ul>
-                        <li>Secured a 6-months fellowship at Foruppo (Bangalore); developed expertise in both project and product management methodologies.</li>
-                        <li>Contributed directly to launching 2 successful projects that generated substantial community interest.</li>
-                        <li>Spearheaded a 10-member team to launch "Hue Haven," a fashion recommendation tool with 100+ users and +40% engagement.</li>
-                        <li>Created "Calm Nest," a mental wellness hub offering 20 support resources.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="experience-box">
-                <img src="img/medtoureasy-logo.jpg" alt="MedTourEasy">
-                <div class="experience-content">
-                    <h3>MedTourEasy Pvt. Ltd. (Healthcare Sector)</h3>
-                    <p><strong>Data Analytics Trainee</strong></p>
-                    <p class="duration">July 2024 (1 month)</p>
-                    <ul>
-                        <li>Mastered 60+ hours of data analytics training, applying insights to solve client business challenges.</li>
-                        <li>Analyzed 3,000+ health metrics, boosting data precision by 25% to inform strategic decisions on fitness insights.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Download Buttons - Updated with working download links -->
+    <a href="Blinkit_PowerBI_Dashboard_Anirudhchaudhary.pdf" download class="download-button">
+        <i class="fas fa-file-pdf"></i> Download Full Dashboard Report (PDF)
+    </a>
 
-    <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <h2 class="heading">My <span>Skills</span></h2>
-        <div class="skills-container">
-            <div class="skill-row">
-                <div class="skill-item">
-                    <div class="chart" data-percent="95">
-                        <svg class="pie-chart" width="200" height="200" viewBox="0 0 120 120">
-                            <circle class="pie-background" cx="60" cy="60" r="54"></circle>
-                            <circle class="pie-fill" cx="60" cy="60" r="54" style="--percent: 0"></circle>
-                        </svg>
-                        <div class="chart-info">
-                            <img src="img/excel.svg" alt="Excel" class="skill-icon">
-                            <span class="percent">0%</span>
-                        </div>
-                    </div>
-                    <h3>Advanced Excel</h3>
-                </div>
-                <div class="skill-item">
-                    <div class="chart" data-percent="90">
-                        <svg class="pie-chart" width="200" height="200" viewBox="0 0 120 120">
-                            <circle class="pie-background" cx="60" cy="60" r="54"></circle>
-                            <circle class="pie-fill" cx="60" cy="60" r="54" style="--percent: 0"></circle>
-                        </svg>
-                        <div class="chart-info">
-                            <img src="img/powerbi2.svg" alt="Power BI" class="skill-icon">
-                            <span class="percent">0%</span>
-                        </div>
-                    </div>
-                    <h3>Power BI</h3>
-                </div>
-                <div class="skill-item">
-                    <div class="chart" data-percent="80">
-                        <svg class="pie-chart" width="200" height="200" viewBox="0 0 120 120">
-                            <circle class="pie-background" cx="60" cy="60" r="54"></circle>
-                            <circle class="pie-fill" cx="60" cy="60" r="54" style="--percent: 0"></circle>
-                        </svg>
-                        <div class="chart-info">
-                            <img src="img/sql.svg" alt="SQL" class="skill-icon">
-                            <span class="percent">0%</span>
-                        </div>
-                    </div>
-                    <h3>MySQL</h3>
-                </div>
-            </div>
-            <div class="skill-row">
-                <div class="skill-item">
-                    <div class="chart" data-percent="75">
-                        <svg class="pie-chart" width="200" height="200" viewBox="0 0 120 120">
-                            <circle class="pie-background" cx="60" cy="60" r="54"></circle>
-                            <circle class="pie-fill" cx="60" cy="60" r="54" style="--percent: 0"></circle>
-                        </svg>
-                        <div class="chart-info">
-                            <img src="img/tableau.svg" alt="Tableau" class="skill-icon">
-                            <span class="percent">0%</span>
-                        </div>
-                    </div>
-                    <h3>Tableau</h3>
-                </div>
-                <div class="skill-item">
-                    <div class="chart" data-percent="60">
-                        <svg class="pie-chart" width="200" height="200" viewBox="0 0 120 120">
-                            <circle class="pie-background" cx="60" cy="60" r="54"></circle>
-                            <circle class="pie-fill" cx="60" cy="60" r="54" style="--percent: 0"></circle>
-                        </svg>
-                        <div class="chart-info">
-                            <img src="img/python.svg" alt="Python" class="skill-icon">
-                            <span class="percent">0%</span>
-                        </div>
-                    </div>
-                    <h3>Python</h3>
-                </div>
-            </div>
-        </div>
-    </section>
+    <a href="Blinkit_Dashboard_Anirudh_Power_BI.pbix" download="Blinkit_Dashboard_Anirudh_Power_BI.pbix" class="powerbi-download-button">
+        <i class="fas fa-download"></i> Download PowerBI File
+    </a>
 
-    <!-- Projects Section -->
-     
-<section class="projects" id="projects">
-    <div class="section-header">
-        <h2 class="heading">My <span>Projects</span></h2>
-        <p class="section-description">Interactive dashboards and analytical solutions delivering actionable business insights</p>
+        <!-- Skills Section -->
+        <section id="skills" style="padding: 2rem 0;">
+            <div class="container">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 2rem;">Technical Skills Applied</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>Power BI</h3>
+                        <p>Data modeling, DAX measures, and interactive visualizations</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Data Analysis</h3>
+                        <p>Operational metrics and KPI development</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h3>Geospatial Analysis</h3>
+                        <p>Delivery area performance mapping</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Business Strategy</h3>
+                        <p>Data-driven recommendations for growth</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Links - Updated with correct GitHub link -->
+    <div class="social-links">
+        <a href="https://www.linkedin.com/in/anirrudhchaudhry" class="linkedin" target="_blank" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/analystAnirudh/Blinkit_PowerBI_dashboard.git" class="github" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:anirudhchaudhary.bba2023@imsuc.ac.in" class="gmail" title="Gmail">
+            <i class="fas fa-envelope"></i>
+        </a>
     </div>
-
-    <div class="projects-grid">
-        <!-- Blinkit Dashboard -->
-        <div class="project-card">
-            <div class="project-image">
-                <img src="img/Blinkit_dashboard_image2.svg" alt="Blinkit Dashboard">
-                <span class="project-badge">Business Intelligence</span>
-            </div>
-            <div class="project-content">
-                <h3 class="project-title">Blinkit Business Intelligence</h3>
-                <p class="project-description">Comprehensive insights into Blinkit's quick commerce operations, analyzing delivery performance, order patterns, and customer behavior metrics to optimize operations and enhance customer experience.</p>
-                
-                <div class="project-stats">
-                    <div class="stat-pill">
-                        <i class="fas fa-tachometer-alt"></i> 15+ Metrics
-                    </div>
-                    <div class="stat-pill">
-                        <i class="fas fa-map-marked-alt"></i> Geo-Analysis
-                    </div>
-                    <div class="stat-pill">
-                        <i class="fas fa-bolt"></i> Real-time Data
-                    </div>
-                </div>
-                
-                <div class="project-tech">
-                    <span class="tech-pill">Power BI</span>
-                    <span class="tech-pill">SQL</span>
-                    <span class="tech-pill">Python</span>
-                    <span class="tech-pill">DAX</span>
-                </div>
-                
-                <a href="https://blinkit-project-anirudh.netlify.app/" class="project-link primary" target="_blank">
-                    <i class="fas fa-external-link-alt"></i> View Live Dashboard
-                </a>
-            </div>
-        </div>
-
-        <!-- Amazon Dashboard -->
-        <div class="project-card">
-            <div class="project-image">
-                <img src="/img/AMAZON_THUMBNAIL.svg" alt="Amazon Dashboard">
-                <span class="project-badge">E-commerce Analytics</span>
-            </div>
-            <div class="project-content">
-                <h3 class="project-title">Amazon Sales Analytics</h3>
-                <p class="project-description">360° view of Amazon's sales ecosystem, analyzing performance across product categories, geographical regions, and operational metrics to drive revenue growth and efficiency.</p>
-                
-                <div class="project-stats">
-                    <div class="stat-pill">
-                        <i class="fas fa-boxes"></i> 50+ Categories
-                    </div>
-                    <div class="stat-pill">
-                        <i class="fas fa-globe-americas"></i> Regional Analysis
-                    </div>
-                    <div class="stat-pill">
-                        <i class="fas fa-percentage"></i> 27% Efficiency
-                    </div>
-                </div>
-                
-                <div class="project-tech">
-                    <span class="tech-pill">Tableau</span>
-                    <span class="tech-pill">Excel</span>
-                    <span class="tech-pill">BigQuery</span>
-                    <span class="tech-pill">Data Studio</span>
-                </div>
-                
-                <a href="https://amazon-sales-dashboard-anirudh.netlify.app/" class="project-link primary" target="_blank">
-                    <i class="fas fa-external-link-alt"></i> View Live Dashboard
-                </a>
-            </div>
-        </div>
-
-        <!-- Retail Digitization -->
-        <div class="project-card">
-            <div class="project-image">
-                <img src="IMG/RETAIL_THUMBNAIL.svg" alt="Retail Digitization">
-                <span class="project-badge">Digital Transformation</span>
-            </div>
-            <div class="project-content">
-                <h3 class="project-title">Retail Store Digitization</h3>
-                <p class="project-description">Digitized offline retail operations with WhatsApp chatbots automating orders and resolving 80% of FAQs, reducing response time by 65% and increasing satisfaction by 40%.</p>
-                
-                <div class="project-stats">
-                    <div class="stat-pill">
-                        <i class="fas fa-robot"></i> Chatbot
-                    </div>
-                    <div class="stat-pill">
-                        <i class="fas fa-question-circle"></i> 80% FAQs
-                    </div>
-                    <div class="stat-pill">
-                        <i class="fas fa-stopwatch"></i> 65% Faster
-                    </div>
-                </div>
-                
-                <div class="project-tech">
-                    <span class="tech-pill">WhatsApp API</span>
-                    <span class="tech-pill">Dialogflow</span>
-                    <span class="tech-pill">Google Sheets</span>
-                    <span class="tech-pill">Automation</span>
-                </div>
-                
-                <a href="#" class="project-link primary">
-                    <i class="fas fa-comment-dots"></i> Chat Demo
-                </a>
-            </div>
-        </div>
-
-        <!-- Bank Loan Analysis -->
-        <div class="project-card">
-            <div class="project-image">
-                <img src="IMG/BANKLOAN_THUMBNAIL.svg" alt="Bank Loan Analysis">
-                <span class="project-badge">Risk Analysis</span>
-            </div>
-            <div class="project-content">
-                <h3 class="project-title">Bank Loan Default Analysis</h3>
-                <p class="project-description">EDA on bank loan applications to identify key factors influencing loan default, reducing default risk by 22% through predictive modeling of 5,000+ customer records.</p>
-                
-                <div class="project-stats">
-                    <div class="stat-pill">
-                        <i class="fas fa-database"></i> 5,000+ Records
-                    </div>
-                    <div class="stat-pill">
-                        <i class="fas fa-exclamation-triangle"></i> 18% High-Risk
-                    </div>
-                    <div class="stat-pill">
-                        <i class="fas fa-cogs"></i> ML Models
-                    </div>
-                </div>
-                
-                <div class="project-tech">
-                    <span class="tech-pill">Python</span>
-                    <span class="tech-pill">Pandas</span>
-                    <span class="tech-pill">Scikit-learn</span>
-                    <span class="tech-pill">Matplotlib</span>
-                </div>
-                
-                <a href="https://github.com/analystAnirudh/Bank-Loan-Default-Analysis" class="project-link primary" target="_blank">
-                    <i class="fab fa-github"></i> View Code
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-   <!-- Leadership Section -->
-<section class="leadership" id="leadership">
-    <div class="floating-element floating-1"></div>
-    <div class="floating-element floating-2"></div>
-
-    <h2 class="heading">Leadership <span>Excellence</span></h2>
-    <div class="section-description">
-        <p>Demonstrating measurable impact through vision and execution</p>
-    </div>
-
-    <div class="leadership-grid">
-        <!-- PULSE-24 Event -->
-        <div class="leadership-card">
-            <div class="card-header">
-                <div class="role-icon">
-                    <i class="fas fa-calendar-star"></i>
-                </div>
-                <h3 class="card-title"><i class="fas fa-calendar-alt"></i> PULSE-24 Festival</h3>
-                <p class="card-subtitle">Annual Flagship Event | 2K+ Footfall</p>
-                <div class="metrics-container">
-                    <div class="metric-pill">
-                        <i class="fas fa-users"></i> 2K+ Participants
-                    </div>
-                    <div class="metric-pill">
-                        <i class="fas fa-clock"></i> 15+ Events
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="star-timeline">
-                    <div class="timeline-line"></div>
-                    
-                    <div class="star-item">
-                        <div class="star-marker">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="star-content">
-                            <div class="star-label">Situation & Task</div>
-                            <p>Coordinated <span class="highlight-number">15+ concurrent activities</span> for <span class="highlight-number">2,000+ attendees</span> with limited resources.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="star-item">
-                        <div class="star-marker">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="star-content">
-                            <div class="star-label">Action</div>
-                            <p>Implemented tiered management system, reducing setup time by <span class="highlight-number">40%</span> through optimized workflows.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="star-item">
-                        <div class="star-marker">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="star-content">
-                            <div class="star-label">Result</div>
-                            <p>Achieved <span class="highlight-number">98% satisfaction</span> with zero logistical issues, setting a new benchmark.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="key-metrics">
-                    <div class="metrics-title">
-                        <i class="fas fa-chart-line"></i> Key Metrics
-                    </div>
-                    <div class="metrics-grid">
-                        <div class="metric-card">
-                            <div class="metric-value count-anim" data-target="2000" data-suffix="+">0+</div>
-                            <div class="metric-label">Participants</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value count-anim" data-target="40" data-suffix="%">0%</div>
-                            <div class="metric-label">Efficiency</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value count-anim" data-target="98" data-suffix="%">0%</div>
-                            <div class="metric-label">Satisfaction</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Marketing Club -->
-        <div class="leadership-card">
-            <div class="card-header">
-                <div class="role-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <h3 class="card-title"><i class="fas fa-hashtag"></i> Marketing Club</h3>
-                <p class="card-subtitle">Instagram Growth Initiative</p>
-                <div class="metrics-container">
-                    <div class="metric-pill">
-                        <i class="fas fa-users"></i> 10K+ Followers
-                    </div>
-                    <div class="metric-pill">
-                        <i class="fas fa-bolt"></i> 30 Days
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="star-timeline">
-                    <div class="timeline-line"></div>
-                    
-                    <div class="star-item">
-                        <div class="star-marker">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="star-content">
-                            <div class="star-label">Situation & Task</div>
-                            <p>Stagnant growth at <span class="highlight-number">1,200 followers</span> with declining engagement rates.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="star-item">
-                        <div class="star-marker">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="star-content">
-                            <div class="star-label">Action</div>
-                            <p>Launched viral campaigns and data-driven content strategy with influencer collaborations.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="star-item">
-                        <div class="star-marker">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="star-content">
-                            <div class="star-label">Result</div>
-                            <p>Achieved <span class="highlight-number">733% growth</span> to 10K+ followers with <span class="highlight-number">65% engagement</span> increase.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="key-metrics">
-                    <div class="metrics-title">
-                        <i class="fas fa-chart-line"></i> Key Metrics
-                    </div>
-                    <div class="metrics-grid">
-                        <div class="metric-card">
-                            <div class="metric-value count-anim" data-target="10000" data-suffix="+">0+</div>
-                            <div class="metric-label">Followers</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value count-anim" data-target="733" data-suffix="%">0%</div>
-                            <div class="metric-label">Growth</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value count-anim" data-target="65" data-suffix="%">0%</div>
-                            <div class="metric-label">Engagement ↑</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Beyond School -->
-        <div class="leadership-card">
-            <div class="card-header">
-                <div class="role-icon">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <h3 class="card-title"><i class="fas fa-graduation-cap"></i> Beyond School</h3>
-                <p class="card-subtitle">Admissions Platform</p>
-                <div class="metrics-container">
-                    <div class="metric-pill">
-                        <i class="fas fa-user-graduate"></i> 500+ Users
-                    </div>
-                    <div class="metric-pill">
-                        <i class="fas fa-star"></i> 4.8 Rating
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="star-timeline">
-                    <div class="timeline-line"></div>
-                    
-                    <div class="star-item">
-                        <div class="star-marker">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="star-content">
-                            <div class="star-label">Situation & Task</div>
-                            <p>Students struggling with fragmented college admission information sources.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="star-item">
-                        <div class="star-marker">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="star-content">
-                            <div class="star-label">Action</div>
-                            <p>Developed centralized platform with rankings and alumni insights through user research.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="star-item">
-                        <div class="star-marker">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="star-content">
-                            <div class="star-label">Result</div>
-                            <p>Launched with <span class="highlight-number">500+ users</span> and <span class="highlight-number">85% retention</span>, featured in campus showcase.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="key-metrics">
-                    <div class="metrics-title">
-                        <i class="fas fa-chart-line"></i> Key Metrics
-                    </div>
-                    <div class="metrics-grid">
-                        <div class="metric-card">
-                            <div class="metric-value count-anim" data-target="500" data-suffix="+">0+</div>
-                            <div class="metric-label">Users</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value count-anim" data-target="85" data-suffix="%">0%</div>
-                            <div class="metric-label">Retention</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value count-anim" data-target="4.8" data-suffix="★">0★</div>
-                            <div class="metric-label">Rating</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-    <!-- Certifications Section -->
-    <section class="certifications" id="certifications">
-        <h2 class="heading">My <span>Certifications</span></h2>
-        <div class="section-description">
-            <p>Continuous learning and professional development across multiple disciplines</p>
-        </div>
-        
-        <div class="category-tabs">
-            <button class="tab-btn" data-category="all">
-                <i class="fas fa-star"></i> All
-            </button>
-            <button class="tab-btn active" data-category="1">
-                <i class="fas fa-chart-bar"></i> Data
-            </button>
-            <button class="tab-btn" data-category="2">
-                <i class="fas fa-hashtag"></i> Marketing
-            </button>
-            <button class="tab-btn" data-category="3">
-                <i class="fas fa-users"></i> Leadership
-            </button>
-            <button class="tab-btn" data-category="4">
-                <i class="fas fa-industry"></i> Industry
-            </button>
-            <button class="tab-btn" data-category="5">
-                <i class="fas fa-robot"></i> AI
-            </button>
-        </div>
-        
-        <div class="certificates-grid">
-            <!-- Data Analytics & Visualization -->
-            <div class="certificate-card category-1" data-category="1">
-                <div class="card-header">
-                    <h3>Microsoft Power BI Mastery</h3>
-                    <p>Skill Course – Satish Dhawale</p>
-                    <div class="card-logo">
-                        <img src="img/powerbi2.svg" alt="Power BI">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Mastered data modeling, visualization, and dashboard creation using Microsoft Power BI.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="certificates/PowerBI_Certificate-Anirudh.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="certificate-card category-1" data-category="1">
-                <div class="card-header">
-                    <h3>SQL Mastery</h3>
-                    <p>Skill Course – Satish Dhawale</p>
-                    <div class="card-logo">
-                        <img src="img/SQL2.svg" alt="SQL">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Advanced SQL querying, database design, and optimization techniques.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="certificates/SQL_Mastery_Certification.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="certificate-card category-1" data-category="1">
-                <div class="card-header">
-                    <h3>Advance Excel</h3>
-                    <p>Skill Course – Satish Dhawale</p>
-                    <div class="card-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg/1200px-Microsoft_Office_Excel_%282019%E2%80%93present%29.svg.png" alt="Excel">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Advanced formulas, pivot tables, data analysis, and automation in Excel.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="certificates/advance_excel_certification.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="certificate-card category-1" data-category="1">
-                <div class="card-header">
-                    <h3>Excel VBA Mastery</h3>
-                    <p>Skill Course – Satish Dhawale</p>
-                    <div class="card-logo">
-                        <img src="img/EXCELVBA.png" alt="Excel VBA">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Automation and advanced functionality using Excel VBA programming.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="certificates/Excel_VBAMastery_Certificate_Anirudh.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="certificate-card category-1" data-category="1">
-                <div class="card-header">
-                    <h3>Data, Data, Everywhere</h3>
-                    <p>Google – Coursera</p>
-                    <div class="card-logo">
-                        <img src="img/google.svg" alt="Google">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Foundational data analytics concepts and tools from Google's certificate program.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="Certificates\Data Data Everywhere-Google-Anirudh Chaudhary.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Marketing & Social Media -->
-            <div class="certificate-card category-2" data-category="2" style="display: none;">
-                <div class="card-header">
-                    <h3>Introduction to Social Media Marketing</h3>
-                    <p>Meta – Coursera</p>
-                    <div class="card-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/1200px-Meta_Platforms_Inc._logo.svg.png" alt="Meta">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Fundamentals of social media marketing strategies and platform management.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="Certificates\Social_Media_Marketing_Certification_Meta.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="certificate-card category-2" data-category="2" style="display: none;">
-                <div class="card-header">
-                    <h3>Fundamentals Of Digital Marketing</h3>
-                    <p>Google – Coursera</p>
-                    <div class="card-logo">
-                        <img src="img/ADS.svg" alt="Google">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Comprehensive digital marketing concepts from search to social media.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="Certificates\Fundamental of Digital Marketing-Google.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="certificate-card category-2" data-category="2" style="display: none;">
-                <div class="card-header">
-                    <h3>WhatsApp API Expert</h3>
-                    <p>Wati</p>
-                    <div class="card-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Expertise in implementing and managing WhatsApp Business API solutions.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="Certificates\WhatsApp_API_Certification_Anirudh.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Leadership, Strategy & Business Skills -->
-            <div class="certificate-card category-3" data-category="3" style="display: none;">
-                <div class="card-header">
-                    <h3>Strategic Thinking</h3>
-                    <p>Harvard Business Publishing</p>
-                    <div class="card-logo">
-                        <img src="img/harvard-business-publishing-seeklogo.png" alt="Harvard">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Developing strategic frameworks for business decision making.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="Certificates\Harvard_Strategic_Thinking-Certificate.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="certificate-card category-3" data-category="3" style="display: none;">
-                <div class="card-header">
-                    <h3>Leadership Skills</h3>
-                    <p>IIM Ahmedabad – Coursera</p>
-                    <div class="card-logo">
-                        <img src="img/IIMahmedabad.svg" alt="IIM">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Essential leadership principles from India's premier management institute.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="certificates/Leadership_Certificate-Anirudh.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="certificate-card category-3" data-category="3" style="display: none;">
-                <div class="card-header">
-                    <h3>Ethics at Work</h3>
-                    <p>Harvard Business Publishing</p>
-                    <div class="card-logo">
-                        <img src="img/harvard-business-publishing-seeklogo.png" alt="Harvard">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Ethical decision making frameworks for professional environments.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="Certificates\Ethics_at_work-Harvard.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Industry Awareness & Applications -->
-            <div class="certificate-card category-4" data-category="4" style="display: none;">
-                <div class="card-header">
-                    <h3>Infosys Young Industry Enthusiast – Retail</h3>
-                    <p>Infosys Springboard</p>
-                    <div class="card-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Infosys_logo.svg/1200px-Infosys_logo.svg.png" alt="Infosys">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Specialized knowledge in retail industry applications and technologies.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="Certificates\Infosys Retail Certificate-Anirudh.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- AI & Prompt Engineering -->
-            <div class="certificate-card category-5" data-category="5" style="display: none;">
-                <div class="card-header">
-                    <h3>Advanced Art of Prompt Engineering</h3>
-                    <p>Skill Nation</p>
-                    <div class="card-logo">
-                        <img src="img/AI.png" alt="AI">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p>Advanced techniques in crafting effective prompts for AI systems.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="view-btn" data-certificate="Certificates\PROMPT ENINEERING CERTIFICATE.webp">
-                        View <i class="fas fa-external-link-alt"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certificate Modal -->
-    <div class="modal-overlay" id="certificateModal">
-        <div class="certificate-modal">
-            <button class="close-modal" id="closeModal">&times;</button>
-            <img src="" alt="Certificate" class="certificate-image" id="modalImage">
-        </div>
-    </div>
-<!-- Testimonials Section -->
-<section class="testimonials" id="testimonials">
-    <h2 class="heading">Mentor <span>Testimonials</span></h2>
-    <div class="section-description">
-        <p>What industry leaders and academic mentors say about my work</p>
-    </div>
-
-    <div class="testimonials-container">
-        <div class="testimonials-track">
-            <!-- Testimonial 1 -->
-            <div class="testimonial-card" data-index="0">
-                <div class="testimonial-content">
-                    Anirudh is a sincere and hardworking individual with a strong academic record and active involvement in co-curricular activities. He has held key roles, including in the Marketing Club, and successfully organized events like Markfest. With hands-on experience in data analytics, Anirudh is diligent, responsible, and a valuable asset to any organization.
-                </div>
-                <div class="testimonial-footer">
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="img/SOUMI MAAM.jpeg" alt="Dr. Soumi Banerjee">
-                        </div>
-                        <div class="author-info">
-                            <div class="author-name">
-                                Dr. Soumi Banerjee
-                                <i class="fas fa-check-circle verified-badge"></i>
-                            </div>
-                            <div class="author-title">Asst. Professor, Noida International University</div>
-                            <div class="company-logo">
-                                <img src="img/noidauniv.svg" alt="NIU">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimonial 2 -->
-            <div class="testimonial-card" data-index="1">
-                <div class="testimonial-content">
-                    Very hard working and sincere student who always respects faculties. Great future ahead Anirudh !!
-                </div>
-                <div class="testimonial-footer">
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="img/SHOBHA MAAM.jpeg" alt="Dr. Shobha Bhardwaj">
-                        </div>
-                        <div class="author-info">
-                            <div class="author-name">
-                                Dr. Shobha Bhardwaj
-                                <i class="fas fa-check-circle verified-badge"></i>
-                            </div>
-                            <div class="author-title">Asst Professor, SRM Institute of Science and Technology</div>
-                            <div class="company-logo">
-                                <img src="img/srm logo.svg" alt="SRM">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimonial 3 -->
-            <div class="testimonial-card" data-index="2">
-                <div class="testimonial-content">
-                    Anirudh consistently demonstrated strong commitment, reliability, and efficiency, ensuring smooth project execution and setting a high standard for peers. His dedication and work ethic make him exceptionally well-suited for success in Project Management.
-                </div>
-                <div class="testimonial-footer">
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="img/aditi.svg" alt="Aditi Kumari">
-                        </div>
-                        <div class="author-info">
-                            <div class="author-name">
-                                Aditi Kumari
-                                <i class="fas fa-check-circle verified-badge"></i>
-                            </div>
-                            <div class="author-title">Project Manager & Sr. Community Manager @ StartUp Party</div>
-                            <div class="company-logo">
-                                <img src="img/FR LOGO.png" alt="StartUp Party">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimonial 4 -->
-            <div class="testimonial-card" data-index="3">
-                <div class="testimonial-content">
-                    I've had the privilege of seeing Anirudh mature into a self-assured and dependable young leader. His commitment, creativity, and serene leadership left a lasting impression on our school community. I have no doubt that he will achieve success in all his future pursuits.
-                </div>
-                <div class="testimonial-footer">
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="IMG/aditi.svg" alt="Dr Indira Sharma">
-                        </div>
-                        <div class="author-info">
-                            <div class="author-name">
-                                Dr Indira Sharma
-                                <i class="fas fa-check-circle verified-badge"></i>
-                            </div>
-                            <div class="author-title">Dean, KDMA International</div>
-                            <div class="company-logo">
-                                <img src="img/kdma.png" alt="KDMA">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Duplicates for infinite loop -->
-            <!-- Testimonial 1 -->
-            <div class="testimonial-card" data-index="0">
-                <div class="testimonial-content">
-                    Anirudh is a sincere and hardworking individual with a strong academic record and active involvement in co-curricular activities. Anirudh is diligent, responsible, and a valuable asset to any organization.
-                </div>
-                <div class="testimonial-footer">
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="img/SOUMI MAAM.jpeg" alt="Dr. Soumi Banerjee">
-                        </div>
-                        <div class="author-info">
-                            <div class="author-name">
-                                Dr. Soumi Banerjee
-                                <i class="fas fa-check-circle verified-badge"></i>
-                            </div>
-                            <div class="author-title">Asst. Professor, Noida International University</div>
-                            <div class="company-logo">
-                                <img src="img/noidauniv.svg" alt="NIU">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimonial 2 -->
-            <div class="testimonial-card" data-index="1">
-                <div class="testimonial-content">
-                    Very hard working and sincere student who always respects faculties. Great future ahead Anirudh !!
-                </div>
-                <div class="testimonial-footer">
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="img/SHOBHA MAAM.jpeg" alt="Dr. Shobha Bhardwaj">
-                        </div>
-                        <div class="author-info">
-                            <div class="author-name">
-                                Dr. Shobha Bhardwaj
-                                <i class="fas fa-check-circle verified-badge"></i>
-                            </div>
-                            <div class="author-title">Asst Professor, SRM Institute of Science and Technology</div>
-                            <div class="company-logo">
-                                <img src="img/srm logo.svg" alt="SRM">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="testimonial-controls">
-        <button class="control-btn prev-btn" id="prevBtn">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <div class="radio-indicators">
-            <div class="radio-indicator active" data-index="0"></div>
-            <div class="radio-indicator" data-index="1"></div>
-            <div class="radio-indicator" data-index="2"></div>
-            <div class="radio-indicator" data-index="3"></div>
-        </div>
-        <button class="control-btn next-btn" id="nextBtn">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
-</section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2 class="heading">Contact <span>Me!</span></h2>
-        <form action="#">
-            <div class="input-box">
-                <input type="text" placeholder="Full Name">
-                <input type="email" placeholder="Email Address">
-            </div>
-            <div class="input-box">
-                <input type="number" placeholder="Mobile Number">
-                <input type="text" placeholder="Email Subject">
-            </div>
-            <textarea cols="30" rows="10" placeholder="Your Message"></textarea>
-            <input type="submit" value="Send Message" class="btn">
-        </form>
-        <div class="contact-info">
-            <div class="info-item popup-icon">
-                <i class="fas fa-envelope"></i>
-                <div>
-                    <h3>Email</h3>
-                    <p>anirudhchaudhary.bba2023@imsuc.ac.in</p>
-                </div>
-            </div>
-            <div class="info-item popup-icon">
-                <i class="fas fa-phone"></i>
-                <div>
-                    <h3>Phone</h3>
-                    <p>+91 7668854321</p>
-                </div>
-            </div>
-            <div class="info-item popup-icon">
-                <i class="fas fa-map-marker-alt"></i>
-                <div>
-                    <h3>Location</h3>
-                    <p>Ghaziabad, Uttar Pradesh, India</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-text">
-            <p>Copyright &copy; 2025 by Anirudh Chaudhary | All Rights Reserved.</p>
-        </div>
-        <div class="footer-iconTop">
-            <a href="#home"><i class="fas fa-arrow-up"></i></a>
-        </div>
+    <footer>
+        <p>Dashboard developed by <span class="footer-name">Anirudh Chaudhary</span></p>
+        <p class="footer-copyright">© 2025 Anirudh Chaudhary. All rights reserved.</p>
     </footer>
 
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <!-- Projects Showcase System -->
+    <div class="projects-master-container">
+        <!-- Amazon Project Container -->
+        <div class="google-project-container" id="googleProjectContainer">
+            <div class="google-project-header" style="background-color: #FF9900;"> <!-- Amazon orange -->
+                <img src="images/amazon-icon.svg" alt="Amazon Logo" class="google-logo">
+                <div class="google-project-title">Amazon Sales Dashboard</div>
+            </div>
+            <div class="google-project-content">
+                <p class="google-project-description">
+                    This interactive dashboard provides a 360° view of Amazon's sales ecosystem,
+                    analyzing performance across product categories, geographical regions, and operational metrics.
+                </p>
+                <a href="https://analystanirudh.github.io/Amazon_portfolio/" target="_blank" class="google-project-link">
+                    View Amazon Dashboard
+                </a>
+            </div>
+        </div>
+        
+        <!-- Toggle Button -->
+        <button class="master-toggle" id="masterToggle">
+            <span class="typewriter" id="toggleText">Explore my other Projects</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Accordion functionality
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach(section => {
+                const header = section.querySelector('.section-header');
+                const content = section.querySelector('.section-content');
+                const toggle = section.querySelector('.section-toggle');
+
+                header.addEventListener('click', () => {
+                    // Close other sections
+                    sections.forEach(otherSection => {
+                        if (otherSection !== section) {
+                            otherSection.querySelector('.section-content').classList.remove('active');
+                            otherSection.querySelector('.section-toggle').textContent = '+';
+                        }
+                    });
+
+                    // Toggle current section
+                    content.classList.toggle('active');
+                    toggle.textContent = content.classList.contains('active') ? '−' : '+';
+                });
+            });
+
+            // Fullscreen toggle functionality
+            const dashboardContainer = document.getElementById('dashboard-container');
+            const fullscreenToggle = document.getElementById('fullscreen-toggle');
+            
+            fullscreenToggle.addEventListener('click', () => {
+                dashboardContainer.classList.toggle('fullscreen');
+                
+                if (dashboardContainer.classList.contains('fullscreen')) {
+                    fullscreenToggle.innerHTML = '<i class="fas fa-compress"></i> Exit Fullscreen';
+                } else {
+                    fullscreenToggle.innerHTML = '<i class="fas fa-expand"></i> Fullscreen';
+                }
+            });
+
+            // Improved number counting animation with easing and repeating
+            function animateValue(id, start, end, duration, isCurrency = false, isDecimal = false) {
+                const obj = document.getElementById(id);
+                let startTimestamp = null;
+                
+                // Easing function for smooth animation
+                const easeOutQuad = (t) => t * (2 - t);
+                
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const easedProgress = easeOutQuad(progress);
+                    
+                    let value;
+                    if (isDecimal) {
+                        value = (easedProgress * (end - start) + start).toFixed(2);
+                    } else {
+                        value = Math.floor(easedProgress * (end - start) + start);
+                    }
+                    
+                    if (isCurrency) {
+                        obj.innerHTML = '₹' + value;
+                    } else {
+                        obj.innerHTML = value;
+                    }
+                    
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            // Text typing animation for "Groceries"
+            function typeWriter(element, text, speed) {
+                let i = 0;
+                element.innerHTML = ''; // Clear before typing
+                function typing() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(typing, speed);
+                    }
+                }
+                typing();
+            }
+
+            // Function to run all animations
+            function runAllAnimations() {
+                // Animate numbers with smoother easing
+                animateValue('total-orders', 0, 1250, 1500);
+                animateValue('avg-delivery', 0, 12.5, 1200, false, true);
+                animateValue('customers', 0, 850, 800);
+                
+                // Animate text
+                const topCategoryElement = document.getElementById('top-category');
+                typeWriter(topCategoryElement, 'Groceries', 100);
+            }
+
+            // Start animations when metrics come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Run animations immediately
+                        runAllAnimations();
+                        
+                        // Set up repeating every 3 seconds
+                        const repeatInterval = setInterval(runAllAnimations, 6000);
+                        
+                        // Stop observing after first animation
+                        observer.unobserve(entry.target);
+                        
+                        // Clean up interval when element leaves view
+                        const leaveObserver = new IntersectionObserver((leaveEntries) => {
+                            leaveEntries.forEach(leaveEntry => {
+                                if (!leaveEntry.isIntersecting) {
+                                    clearInterval(repeatInterval);
+                                    leaveObserver.unobserve(leaveEntry.target);
+                                }
+                            });
+                        }, { threshold: 0 });
+                        
+                        leaveObserver.observe(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            // Observe the metrics container
+            const metricsContainer = document.querySelector('.metrics-container');
+            observer.observe(metricsContainer);
+
+            // Projects Showcase System
+            const masterToggle = document.getElementById('masterToggle');
+            const googleProjectContainer = document.getElementById('googleProjectContainer');
+            const toggleText = document.getElementById('toggleText');
+            
+            // Toggle project container
+            masterToggle.addEventListener('click', () => {
+                masterToggle.classList.toggle('active');
+                googleProjectContainer.classList.toggle('visible');
+            });
+            // Typewriter effect for toggle text - UPDATED VERSION
+            const toggleTexts = [
+                "Amazon Sales Dashboard",
+                "View Other Projects",
+                "View Amazon Insights"
+            ];
+            let currentToggleIndex = 0;
+
+            function typeWriterWithCallback(element, text, speed, callback) {
+                let i = 0;
+                element.innerHTML = '';
+                
+                function typing() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(typing, speed);
+                    } else if (callback) {
+                        setTimeout(callback, 1000); // Wait 1 second before deleting
+                    }
+                }
+                
+                typing();
+            }
+
+            function deleteText(element, speed, callback) {
+                let text = element.innerHTML;
+                let length = text.length;
+                
+                function deleting() {
+                    if (length > 0) {
+                        element.innerHTML = text.substring(0, length - 1);
+                        length--;
+                        setTimeout(deleting, speed);
+                    } else if (callback) {
+                        callback();
+                    }
+                }
+                
+                deleting();
+            }
+
+            function animateToggleText() {
+                typeWriterWithCallback(toggleText, toggleTexts[currentToggleIndex], 50, () => {
+                    // After typing completes, wait then delete
+                    setTimeout(() => {
+                        deleteText(toggleText, 30, () => {
+                            // After deleting completes, move to next text
+                            currentToggleIndex = (currentToggleIndex + 1) % toggleTexts.length;
+                            setTimeout(animateToggleText, 500); // Short pause before next cycle
+                        });
+                    }, 1000); // Show completed text for 1 second before deleting
+                });
+            }
+
+            // Start animation
+            animateToggleText();
+            
+            // Initial animation on page load
+            setTimeout(() => {
+                masterToggle.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    masterToggle.style.transform = 'scale(1)';
+                }, 300);
+            }, 1500);
+        });
+    </script>
 </body>
 </html>
